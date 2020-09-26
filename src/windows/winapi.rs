@@ -15,7 +15,7 @@ use crate::util::io_err;
 extern crate libc;
 extern crate winapi;
 
-use crate::platform::winapi::winapi::shared::{guiddef, minwindef, ntdef, windef};
+pub use crate::platform::winapi::winapi::shared::{guiddef, minwindef, ntdef, windef};
 use crate::platform::winapi::winapi::shared::{hidclass, hidpi, hidusage};
 use crate::platform::winapi::winapi::um::{handleapi, setupapi};
 

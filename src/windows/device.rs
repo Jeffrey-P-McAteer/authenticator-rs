@@ -9,6 +9,7 @@ use std::os::windows::io::AsRawHandle;
 
 use super::winapi::DeviceCapabilities;
 use crate::consts::{CID_BROADCAST, FIDO_USAGE_PAGE, FIDO_USAGE_U2FHID, MAX_HID_RPT_SIZE};
+use crate::platform::winapi::ntdef;
 use crate::u2ftypes::{U2FDevice, U2FDeviceInfo};
 
 #[derive(Debug)]
@@ -31,7 +32,7 @@ impl Device {
     }
 
     pub fn is_u2f(&self) -> bool {
-        match DeviceCapabilities::new(self.file.as_raw_handle()) {
+        match DeviceCapabilities::new(self.file.as_raw_handle() as ntdef::HANDLE) {
             Ok(caps) => caps.usage() == FIDO_USAGE_U2FHID && caps.usage_page() == FIDO_USAGE_PAGE,
             _ => false,
         }
